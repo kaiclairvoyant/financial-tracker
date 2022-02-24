@@ -15,17 +15,28 @@ func List(c *gin.Context) {
 	log.Println("GET request processed")
 }
 
-func FilterByDate(c *gin.Context) {
-	var expenses []entity.Expense
-	expenses = repository.FilterByDate(expenses)
-	c.JSON(http.StatusOK, expenses)
+func GetTotalValue(c *gin.Context) {
+	var totalValue float32
+	totalValue = repository.GetTotalValue()
+	c.JSON(http.StatusOK, totalValue)
 	log.Println("GET request processed")
 }
+
+//func FilterByDate(c *gin.Context) {
+//	var expenses []entity.Expense
+//	expenses = repository.FilterByDate(expenses)
+//	c.JSON(http.StatusOK, expenses)
+//	log.Println("GET request processed")
+//}
 
 func Store(c *gin.Context) {
 	var expense entity.Expense
 
-	c.BindJSON(&expense)
+	err := c.BindJSON(&expense)
+	if err != nil {
+		log.Printf("POST request FAILED with %v\n", err)
+		return
+	}
 
 	log.Printf("Expense built from request: %+v", expense)
 
