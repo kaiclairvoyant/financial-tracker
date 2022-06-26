@@ -1,3 +1,2 @@
 # financial-tracker
-simple go api I'm working on as a side project to learn and practice...
-# WIP
+simple Go api to try out the language and the Gin framework
