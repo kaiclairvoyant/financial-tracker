@@ -1,7 +1,7 @@
-package repository
+package repositories
 
 import (
-	"financial-tracker/src/expenses/entity"
+	"financial-tracker/src/entities"
 	uuid "github.com/satori/go.uuid"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -11,13 +11,13 @@ import (
 
 var dbAddress = "test.db"
 
-func Save(expense entity.Expense) entity.Expense {
+func Save(expense entities.Expense) entities.Expense {
 	db, err := gorm.Open(sqlite.Open(dbAddress), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect to database")
 	}
 
-	//err = db.AutoMigrate(&entity.Expense{})
+	//err = db.AutoMigrate(&entities.Expense{})
 	//
 	//if err != nil {
 	//	panic("migration error")
@@ -30,7 +30,7 @@ func Save(expense entity.Expense) entity.Expense {
 	return expense
 }
 
-func List(expenses []entity.Expense) []entity.Expense {
+func List(expenses []entities.Expense) []entities.Expense {
 	db, err := gorm.Open(sqlite.Open(dbAddress), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect to database")
@@ -49,7 +49,7 @@ func GetTotalValue() float32 {
 	return float32(totalValue) / 100
 }
 
-//func FilterByDate(expenses []entity.Expense) []entity.Expense {
+//func FilterByDate(expenses []entities.Expense) []entities.Expense {
 //	db, err := gorm.Open(sqlite.Open(dbAddress), &gorm.Config{})
 //
 //	if err != nil {
